@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>gk | Software Engineer</title>
+<style>
+  :root {
+    --bg: #fafaf7;
+    --surface: #ffffff;
+    --text: #1a1a1a;
+    --muted: #5c5c5c;
+    --accent: #2d6a4f;
+    --accent-soft: #d8f3dc;
+    --border: #e4e4df;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0f1412;
+      --surface: #171e1b;
+      --text: #ebf0ed;
+      --muted: #9aa8a1;
+      --accent: #74c69d;
+      --accent-soft: #1d3a2d;
+      --border: #26312c;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0f1412;
+    --surface: #171e1b;
+    --text: #ebf0ed;
+    --muted: #9aa8a1;
+    --accent: #74c69d;
+    --accent-soft: #1d3a2d;
+    --border: #26312c;
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  nav {
+    position: sticky;
+    top: env(safe-area-inset-top, 0px);
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    z-index: 10;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 24px; }
+  nav .wrap {
+    display: flex; justify-content: space-between; align-items: center;
+    height: 60px;
+  }
+  .logo { font-weight: 700; color: var(--text); font-size: 1.1rem; }
+  .links { display: flex; gap: 20px; font-size: 0.95rem; }
+  .links a { color: var(--muted); }
+  .links a:hover { color: var(--accent); text-decoration: none; }
+
+  header.hero { padding: 96px 0 64px; }
+  .eyebrow {
+    display: inline-block; font-size: 0.85rem; font-weight: 600;
+    color: var(--accent); background: var(--accent-soft);
+    padding: 4px 12px; border-radius: 999px; margin-bottom: 20px;
+  }
+  h1 { font-size: clamp(2.2rem, 6vw, 3.4rem); line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 18px; }
+  .lead { font-size: 1.15rem; color: var(--muted); max-width: 620px; }
+  .cta { margin-top: 32px; display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn {
+    display: inline-block; padding: 10px 20px; border-radius: 8px;
+    border: 1px solid var(--border); color: var(--text); font-weight: 500;
+    background: var(--surface);
+  }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .btn:hover { text-decoration: none; opacity: 0.9; }
+
+  section { padding: 56px 0; border-top: 1px solid var(--border); }
+  h2 { font-size: 1.6rem; margin-bottom: 8px; letter-spacing: -0.01em; }
+  .section-sub { color: var(--muted); margin-bottom: 28px; }
+
+  .grid { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+  .card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 14px; padding: 24px;
+    transition: transform 0.15s ease, border-color 0.15s ease;
+  }
+  .card:hover { transform: translateY(-2px); border-color: var(--accent); }
+  .card h3 { font-size: 1.15rem; margin-bottom: 6px; }
+  .card .tag {
+    font-size: 0.8rem; color: var(--accent); font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 10px; display: block;
+  }
+  .card p { color: var(--muted); font-size: 0.95rem; margin-bottom: 14px; }
+  .stack { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+  .stack span {
+    font-size: 0.78rem; padding: 3px 9px; border-radius: 6px;
+    background: var(--bg); border: 1px solid var(--border); color: var(--muted);
+  }
+  .card .card-links { font-size: 0.9rem; font-weight: 500; }
+
+  .timeline { position: relative; padding-left: 22px; border-left: 2px solid var(--border); }
+  .job { margin-bottom: 36px; position: relative; }
+  .job::before {
+    content: ""; position: absolute; left: -29px; top: 6px;
+    width: 12px; height: 12px; border-radius: 50%;
+    background: var(--accent); border: 3px solid var(--bg);
+  }
+  .job h3 { font-size: 1.1rem; }
+  .job .meta { color: var(--muted); font-size: 0.9rem; margin-bottom: 8px; }
+  .job ul { padding-left: 18px; color: var(--muted); font-size: 0.97rem; }
+  .job li { margin-bottom: 4px; }
+
+  .about p { color: var(--muted); margin-bottom: 14px; max-width: 680px; }
+  .about strong { color: var(--text); }
+
+  .skills { display: flex; flex-wrap: wrap; gap: 8px; }
+  .skills span {
+    background: var(--surface); border: 1px solid var(--border);
+    padding: 6px 12px; border-radius: 8px; font-size: 0.9rem;
+  }
+
+  footer {
+    border-top: 1px solid var(--border); padding: 32px 0;
+    color: var(--muted); font-size: 0.9rem; text-align: center;
+  }
+
+  @media (max-width: 600px) {
+    .links { gap: 14px; font-size: 0.88rem; }
+    header.hero { padding: 64px 0 48px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="logo" href="#top">gk</a>
+    <div class="links">
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <span class="eyebrow">Open to SWE roles</span>
+    <h1>Hi, I'm gk.<br>I build software that learns and scales.</h1>
+    <p class="lead">Computer Science and Mathematics student at UC San Diego, graduating June 2028. I build ML systems and backend services that handle real traffic.</p>
+    <div class="cta">
+      <a class="btn primary" href="#projects">See my work</a>
+      <a class="btn" href="https://github.com/gkuniyil" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn" href="https://www.linkedin.com/in/gayathri-kuniyil-a57b63294" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </div>
+</header>
+
+<section id="projects">
+  <div class="wrap">
+    <h2>Projects</h2>
+    <p class="section-sub">Systems I've built end to end.</p>
+    <div class="grid">
+
+      <article class="card">
+        <span class="tag">Featured · Multi-agent platform</span>
+        <h3>AI Code Reviewer</h3>
+        <p>Automated code review for GitHub pull requests. Multiple agents check each change for bugs, security issues, and performance problems. Webhooks are HMAC-verified, and reviews run asynchronously on Redis and Celery so the webhook never blocks.</p>
+        <div class="stack">
+          <span>LangGraph</span><span>Celery</span><span>FAISS</span><span>Groq</span><span>Docker</span><span>GitHub Actions</span>
+        </div>
+        <div class="card-links"><a href="https://github.com/gkuniyil/ai-code-reviewer" target="_blank" rel="noopener">View repo →</a></div>
+      </article>
+
+      <article class="card">
+        <span class="tag">Full-stack ML</span>
+        <h3>La Liga Match Predictor</h3>
+        <p>End-to-end prediction system with a custom Elo rating engine, an XGBoost classifier, and a Monte Carlo season simulator running 10,000 replays across 1,900 historical matches. Includes monitoring and a React frontend.</p>
+        <div class="stack">
+          <span>XGBoost</span><span>FastAPI</span><span>PostgreSQL</span><span>Redis</span><span>MLflow</span><span>React</span>
+        </div>
+        <div class="card-links"><a href="https://github.com/gkuniyil/football-predictor" target="_blank" rel="noopener">View repo →</a></div>
+      </article>
+
+
+
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <h2>Experience</h2>
+    <p class="section-sub">Where I've worked recently.</p>
+    <div class="timeline">
+
+      <div class="job">
+        <h3>Software Engineering Co-op</h3>
+        <div class="meta">RTX (Raytheon Technologies) · Sep 2026 to Present</div>
+        <ul>
+          <li>Building Mission Systems software in Java.</li>
+          <li>Working in an Agile team with DevSecOps practices.</li>
+        </ul>
+      </div>
+
+      <div class="job">
+        <h3>Summer Internship, Customer Operations and Data Analytics</h3>
+        <div class="meta">Shield AI · Summer 2026</div>
+        <ul>
+          <li>Worked on customer operations analytics and data work.</li>
+        </ul>
+      </div>
+
+      <div class="job">
+        <h3>CS Tutor</h3>
+        <div class="meta">Coding Minds Academy</div>
+        <ul>
+          <li>Tutoring CS students and helping them build confidence in programming.</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="now">
+  <div class="wrap">
+    <h2>Currently</h2>
+    <p class="section-sub">What I'm working on right now.</p>
+    <p>Building a grocery product comparison app with a Redis token-bucket rate limiter, a caching layer, and Bayesian weighted ratings on top of the Open Food Facts API.</p>
+    <p>Working on Mission Systems software at RTX as a part-time co-op.</p>
+  </div>
+</section>
+
+<section id="about" class="about">
+  <div class="wrap">
+    <h2>About</h2>
+    <p class="section-sub">A bit more about me.</p>
+    <p>I'm a Computer Science and Mathematics student at UC San Diego with a Provost Honors standing. I like working on problems where software, data, and math meet.</p>
+    <p>Outside of class, I'm an active member of <strong>Women in Computing</strong> at UCSD, where I help organize the club's hackathon. I care about making CS feel less intimidating, especially for women in technical spaces.</p>
+    <p>I'm looking for software engineering roles, with interest in AI and infrastructure teams and in companies building large-scale systems.</p>
+
+    <h3 style="margin-top: 32px; margin-bottom: 14px; font-size: 1.1rem;">Skills</h3>
+    <div class="skills">
+      <span>Python</span><span>Java</span><span>C++</span><span>SQL</span><span>PyTorch</span><span>scikit-learn</span>
+      <span>FastAPI</span><span>PostgreSQL</span><span>Docker</span><span>AWS</span><span>Redis</span><span>Celery</span>
+      <span>LangGraph</span><span>FAISS</span><span>Claude API</span><span>Groq</span>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <h2>Contact</h2>
+    <p class="section-sub">Want to chat about a role, a project, or just tech? Reach out.</p>
+    <div class="cta">
+      <a class="btn primary" href="https://github.com/gkuniyil" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn" href="https://www.linkedin.com/in/gayathri-kuniyil-a57b63294" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>© 2026 gk. Built with plain HTML and CSS.</p>
+  </div>
+</footer>
+
+</body>
+</html>
